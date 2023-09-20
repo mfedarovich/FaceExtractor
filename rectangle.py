@@ -1,11 +1,11 @@
-def make_square(box : list) :
+def make_square(box : list, margin, shift_center) :
     max_border = box[2] if box[2] > box[3] else box[3]
     face_center = [
         (int)((2*box[0]+box[2])/2), 
         (int)((2*box[1]+box[3])/2)
     ]
-    new_size = (int)(1.3*max_border)
-    shift_window_up = (int)(0.2*new_size)
+    new_size = (int)((1+margin)*max_border)
+    shift_window_up = (int)(shift_center*new_size)
     face_center[1] = face_center[1] - shift_window_up
     
     half_size = (int)(new_size/2)
