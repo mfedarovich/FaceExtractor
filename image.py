@@ -13,12 +13,12 @@ def detect_faces(img : cv2.typing.MatLike, resolution, margin, shift_center) :
             if box !=[] and faces['confidence'] > 0.95:
                 faceBox = rectangle.make_square(box, margin, shift_center)
                 cropped_img=img[faceBox[1]: faceBox[3],faceBox[0]: faceBox[2]]
-                height, width, _ = cropped_img.shape
+                height, width = cropped_img.shape[:2]
                 yield {
-                     "image":cropped_img, 
-                     "confidence" : faces['confidence'],
-                     "keypoints" : json.dumps(faces['keypoints']),
-                     "resolution" : f"{width}x{height}"
+                     'image':cropped_img, 
+                     'confidence' : faces['confidence'],
+                     'keypoints' : json.dumps(faces['keypoints']),
+                     'is_square' : width==height
                      }
 
 def scale_image(image, resolution):
