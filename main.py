@@ -13,7 +13,6 @@ parser.add_argument('output', metavar='out', type=str, help='output directory')
 parser.add_argument('--resolution', metavar='resolution', type=int, default=512, help='required resolution')
 parser.add_argument('--log', metavar='log', type=bool, default=False, help='create log file')
 parser.add_argument('--margin', metavar='margin', type=float, default=0.4, help='percent of outbox margin')
-parser.add_argument('--shift_center', metavar='shift_center', type=float, default=-0.1, help='percent to shift center')
 parser.add_argument('--original_folder', metavar='original', type=str, default="original")
 parser.add_argument('--scaled_folder', metavar='scaled', type=str, default='scaled')
 
@@ -42,7 +41,7 @@ for image_file in filter(
 
     img=cv2.imread(image_file)
     i = 1
-    for face in image.detect_faces(img, args.resolution, args.margin, args.shift_center) :
+    for face in image.detect_faces(img, args.margin) :
         new_file_name = file_name + f"x{i}"
         new_dir = path.join_folders(original_dir, sub_folder)
         path.create_if_not_exist(new_dir)
